@@ -6,34 +6,46 @@ import JavascriptIcon from '../components/icons/IconJavascript.vue'
 import TypescriptIcon from '../components/icons/IconTypescript.vue'
 import NodeIcon from '../components/icons/IconNode.vue'
 import VueIcon from '../components/icons/IconVue.vue'
+import SunIcon from '@/components/icons/IconSun.vue'
+import MoonIcon from '@/components/icons/IconMoon.vue'
+import { ref } from 'vue'
+
+const dark = ref(true)
+
+const darkToggle = () => {
+  const element = document.querySelector('main')
+  element?.classList.toggle('dark')
+
+  dark.value = !dark.value
+}
 </script>
 
 <template>
   <main>
     <div id="nav">
-      <div class="nav-wrap">
-        <div class="nav-logo">
-          <a href="https://x.com/SolitudeRain_" target="_blank">
-            <TwitterIcon />
-          </a>
-        </div>
-        <div class="nav-logo">
-          <a href="https://discordapp.com/users/113686209955364867" target="_blank">
-            <DiscordIcon />
-          </a>
-        </div>
-        <div class="nav-logo">
-          <a href="https://github.com/skoleosho97" target="_blank">
-            <GithubIcon />
-          </a>
-        </div>
+      <div class="nav-logos-wrap">
+        <a class="nav-logo" href="https://x.com/SolitudeRain_" target="_blank">
+          <TwitterIcon />
+        </a>
+        <a class="nav-logo" href="https://discordapp.com/users/113686209955364867" target="_blank">
+          <DiscordIcon />
+        </a>
+        <a class="nav-logo" href="https://github.com/skoleosho97" target="_blank">
+          <GithubIcon />
+        </a>
       </div>
-      <div class="nav-wrap">
+      <div class="nav-links-wrap">
         <div class="nav-link">
           <a href="#about-me">About Me</a>
         </div>
         <div class="nav-link">
           <a href="#projects">Projects</a>
+        </div>
+        <div class="nav-link">
+          <button @click="darkToggle">
+            <MoonIcon v-if="dark" />
+            <SunIcon v-else />
+          </button>
         </div>
       </div>
     </div>
@@ -98,6 +110,16 @@ import VueIcon from '../components/icons/IconVue.vue'
     </div>
     <div id="projects">
       <h1>&#47;&#47; Portfolio</h1>
+      <div class="projects-wrap">
+        <div class="project">
+          <div class="tools">
+            <div class="tool">Vue</div>
+            <div class="tool">TypeScript</div>
+            <div class="tool">HTML</div>
+            <div class="tool">CSS</div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
@@ -105,11 +127,33 @@ import VueIcon from '../components/icons/IconVue.vue'
 <style lang="css" scoped>
 main {
   height: 100vh;
+  background: #eeeeee;
+  color: #0e0e0e;
   display: flex;
   flex-direction: column;
   overflow: auto;
-  background: #eeeeee;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+main a {
   color: #0e0e0e;
+}
+
+main svg {
+  fill: #dd6e00;
+  stroke: #dd6e00;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+svg {
+  height: 25px;
 }
 
 #nav {
@@ -119,24 +163,22 @@ main {
   padding: 10px 300px;
 }
 
-.nav-wrap {
+.nav-logos-wrap,
+.nav-links-wrap {
   height: 25px;
-  width: 150px;
   display: flex;
   justify-content: space-between;
 }
 
-.nav-logo {
-  width: 25px;
-  height: 25px;
+.nav-logos-wrap {
+  width: 150px;
 }
 
-.nav-logo a {
-  width: 100%;
-  height: 100%;
+.nav-links-wrap {
+  width: 200px;
 }
 
-.nav-logo a:hover {
+.nav-logo svg:hover {
   opacity: 0.75;
   transition: 0.4s;
 }
@@ -144,7 +186,6 @@ main {
 .nav-link a {
   text-decoration: none;
   font-weight: 500;
-  color: #0e0e0e;
 }
 
 .container {
@@ -183,13 +224,10 @@ h1 {
 
 #about-me,
 #projects {
-  padding: 0 300px;
-}
-
-#about-me {
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
+  padding: 0 300px;
 }
 
 .container {
@@ -220,5 +258,35 @@ h1 {
 .icon svg:hover {
   filter: grayscale(0);
   transition: 0.6s;
+}
+
+.project {
+  width: 200px;
+  background: #e6e6e6;
+  padding: 5px;
+}
+
+.project .tools {
+  display: flex;
+}
+
+.project .tools .tool {
+  background: red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dark {
+  background: #0e0e0e;
+  color: #eeeeee;
+}
+
+.dark a {
+  color: #eeeeee;
+}
+
+.dark svg {
+  fill: #dd6e00;
+  stroke: #dd6e00;
 }
 </style>

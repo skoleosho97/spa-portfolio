@@ -2,7 +2,7 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
-    preserveAspectRatio="xMidYMid"
+    preserveAspectRatio="none"
     fill="#8cc84b"
   >
     <path
